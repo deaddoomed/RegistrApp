@@ -9,5 +9,17 @@ export const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
+  },  {
+    path: 'login',
+    loadComponent: () => import('./login/login.page').then( m => m.LoginPage)
   },
+  {
+    path: 'alumno',
+    loadComponent: () => import('./alumno/alumno.page').then( m => m.AlumnoPage)
+  },
+  {
+    path: 'docente',
+    loadComponent: () => import('./docente/docente.page').then( m => m.DocentePage)
+  },
+
 ];
