@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { Route, Router } from '@angular/router';
+import { UserModel } from '../models/UserModel';
 
 @Component({
   selector: 'app-alumno',
@@ -12,7 +14,11 @@ import { IonicModule } from '@ionic/angular';
 })
 export class AlumnoPage implements OnInit {
 
-  constructor() { }
+  studentInfoReceived: UserModel | undefined;
+
+  constructor(private route : Router) {
+    this.studentInfoReceived = this.route.getCurrentNavigation()?.extras.state?.['user'];
+   }
 
   ngOnInit() {
   }

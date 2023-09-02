@@ -14,20 +14,20 @@
   <div>
     <div>
       <ion-label class="center-content">Login</ion-label>
-      <ion-input class="center-content" label="Username" [(ngModel)]="userLoginModal.username"></ion-input>
-      <ion-input class="center-content" label="Password" [(ngModel)]="userLoginModal.password"></ion-input>
+      <ion-input class="center-content" label="Username" [(ngModel)]="userLoginModal.user"></ion-input>
+      <ion-input class="center-content" label="Password" [(ngModel)]="userLoginModal.pass"></ion-input>
     </div>
     <div>
       <!--
         Navigación con una función.
       -->
-      <ion-button color="success" (click)="userLogin(userLoginModal)">Login</ion-button>
+      <button mat-stroked-button color="primary" (click)="userLogin(userLoginModal)">Login</button>
     </div>
     <div>
       <!--
         Navegación via HTML.
       -->
-      <ion-button [routerLink]="['/usuario',userLoginModal.username]">Go to Usuario with HREF</ion-button>
+      <ion-button [routerLink]="['/docente',userLoginModal.user]">Go to Usuario with HREF</ion-button>
     </div>
   </div>
 
