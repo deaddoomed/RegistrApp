@@ -25,6 +25,7 @@ export class AlumnoPage implements OnInit {
    }
 
   ngOnInit() {
+
   }
 
   backLogin() {

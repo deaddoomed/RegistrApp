@@ -15,10 +15,11 @@ import { UserModel } from '../models/UserModel';
 })
 export class LoginPage implements OnInit {
 
-  //INICIALIZANDO VARIABLES A USAR
+  //LISTA DE USUARIOS A USAR PARA PRUEBA
   listUser: UserModel[] = [
     new UserModel('GeneCon','Genesis','Contreras',11222333,'genecon123','student'),
-    new UserModel('JorgGom','Jorge','Gomez',99888777,'jorgo98','teacher')
+    new UserModel('JorgGom','Jorge','Gomez',99888777,'jorgo98','teacher'),
+    new UserModel('IgnaGal','Ignacio','Gallardo',44555666,'ignaga45','student')
   ];
 
   userLoginModal: IUserLogin = {
@@ -38,6 +39,7 @@ export class LoginPage implements OnInit {
     this.userLoginModal.pass = '';
   }
 
+  //FUNCION DE LOGUEO
   userLogin(userLoginInfo: IUserLogin): boolean{
     for(let n = 0; n < this.listUser.length; n++){
       if ( (this.listUser[n].user == userLoginInfo.user) && (this.listUser[n].pass == userLoginInfo.pass)) {

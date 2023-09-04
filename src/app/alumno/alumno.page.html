@@ -11,7 +11,13 @@
     </ion-toolbar>
   </ion-header>
 
-  <h1 class="center-content" style="padding-bottom: 50px">Bienvenido {{ studentInfoReceived?.name }}</h1>
+  <div>
+    <div>
+      <ion-button (click)="backLogin()">Volver al Login</ion-button>
+    </div>
+  </div>
+
+  <h1 id="welcome" class="center-content" style="padding-bottom: 50px">Bienvenido {{ studentInfoReceived?.name }}</h1>
 
   <ion-list [inset]="true">
     <ion-list-header>
@@ -32,10 +38,6 @@
     </ion-item>
   </ion-list>
 
-  <div>
-    <div>
-      <ion-button (click)="backLogin()">Volver al Login</ion-button>
-    </div>
-  </div>
+
 
 </ion-content>
