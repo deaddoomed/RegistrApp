@@ -55,6 +55,7 @@ export class LoginPage implements OnInit {
         }
       }
     }
+    this.userLoginModalRestart();
     return false;
   }
 

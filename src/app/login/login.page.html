@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>login</ion-title>
+    <ion-title>RegistrApp</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,24 +11,46 @@
     </ion-toolbar>
   </ion-header>
 
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Login</ion-card-title>
+    </ion-card-header>  
+
+  </ion-card>
+
   <div>
+
     <div>
-      <ion-label class="center-content">Login</ion-label>
-      <ion-input class="center-content" label="Username" [(ngModel)]="userLoginModal.user"></ion-input>
-      <ion-input class="center-content" label="Password" [(ngModel)]="userLoginModal.pass"></ion-input>
+      <ion-input 
+        class="center-content" 
+        label="Username" 
+        placeholder="Ingresa tu nombre de usuario"
+        [clearInput]="true"
+        labelPlacement="floating" 
+        [(ngModel)]="userLoginModal.user">
+      </ion-input>
+
+      <div>
+
+      </div>
+
+      <ion-input 
+        class="center-content" 
+        label="Password" 
+        placeholder="Ingresa tu contraseña" 
+        [clearInput]="true"
+        type="Password"
+        labelPlacement="floating"
+        [(ngModel)]="userLoginModal.pass">
+      </ion-input>
+      
     </div>
-    <div>
-      <!--
-        Navigación con una función.
-      -->
-      <button mat-stroked-button color="primary" (click)="userLogin(userLoginModal)">Login</button>
+
+    <div class="center-content">
+      <ion-button (click)="userLogin(userLoginModal)">Login</ion-button>
     </div>
-    <div>
-      <!--
-        Navegación via HTML.
-      -->
-      <ion-button [routerLink]="['/docente',userLoginModal.user]">Go to Usuario with HREF</ion-button>
-    </div>
+
+    <img alt="logo" src="../../assets/img/logo.png" />
   </div>
 
 </ion-content>
