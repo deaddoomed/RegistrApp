@@ -1,4 +1,4 @@
 export interface IUserLogin {
-    user: string;
-    pass: string;
+    username: string;
+    password: string;
 }

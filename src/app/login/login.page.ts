@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CommonModule, NgFor, NgIf, NgForOf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { Router, NavigationExtras, RouterLinkWithHref } from '@angular/router';
+import { Router, RouterLinkWithHref } from '@angular/router';
 import { IUserLogin } from '../models/IUserLogin';
+import { lastValueFrom } from 'rxjs';
+import { UserService } from '../services/user_service';
 import { UserModel } from '../models/UserModel';
+import { Preferences } from '@capacitor/preferences';
 
 @Component({
   selector: 'app-login',
@@ -13,52 +16,50 @@ import { UserModel } from '../models/UserModel';
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule, RouterLinkWithHref]
 })
-export class LoginPage implements OnInit {
-
-  //LISTA DE USUARIOS A USAR PARA PRUEBA
-  listUser: UserModel[] = [
-    new UserModel('GeneCon','Genesis','Contreras',11222333,'genecon123','student'),
-    new UserModel('JorgGom','Jorge','Gomez',99888777,'jorgo98','teacher'),
-    new UserModel('IgnaGal','Ignacio','Gallardo',44555666,'ignaga45','student')
-  ];
+export class LoginPage implements OnInit, OnDestroy{
 
   userLoginModal: IUserLogin = {
-    user: '',
-    pass: ''
+    username: '',
+    password: ''
   };
 
-  constructor( private route : Router) { }
+  constructor(private route: Router, private _usuarioService: UserService) { }
+
+  public userExists?: UserModel;
+  public userList: UserModel[] = [];
   
   //REINICIA VARIABLE USERLOGINMODAL
   ngOnInit() {
     this.userLoginModalRestart();
   }
 
+  ngOnDestroy(): void {
+    throw new Error('Method not implemented.');
+  }
+
   userLoginModalRestart(): void {
-    this.userLoginModal.user = '';
-    this.userLoginModal.pass = '';
+    this.userLoginModal.username = '';
+    this.userLoginModal.password = '';
+  }
+
+  async setObject(user: UserModel) {
+    await Preferences.set({
+      key: 'user',
+      value: JSON.stringify(user)
+    });
   }
 
   //FUNCION DE LOGUEO
-  userLogin(userLoginInfo: IUserLogin): boolean{
-    for(let n = 0; n < this.listUser.length; n++){
-      if ( (this.listUser[n].user == userLoginInfo.user) && (this.listUser[n].pass == userLoginInfo.pass)) {
-        let userInfoSend : NavigationExtras = {
-          state: {user : this.listUser[n]}
-          }
-
-        if (this.listUser[n].type == 'student'){
-          let sendInfo = this.route.navigate(['/alumno'],userInfoSend);
-          return true;
-        }
-        if (this.listUser[n].type == 'teacher'){
-          let sendInfo = this.route.navigate(['/docente'],userInfoSend);
-          return true;
-        }
-      }
+  async userLogin(userLoginInfo: IUserLogin){
+    const user_id = await lastValueFrom(this._usuarioService.getLoginUser(userLoginInfo));
+    console.log(user_id);
+    if (user_id) {
+      console.log("Usuario existe...");
+      this.route.navigate(['/user-type-menu'], { state: { userInfo: user_id}})
+    } else {
+      //NO EXISTE
+      console.log("Usuario no existe...");
     }
-    this.userLoginModalRestart();
-    return false;
   }
 
 }
