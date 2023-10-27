@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { CommonModule, NgFor, NgIf, NgForOf } from '@angular/common';
+import { CommonModule} from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Router, RouterLinkWithHref } from '@angular/router';
@@ -14,8 +14,10 @@ import { Preferences } from '@capacitor/preferences';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, RouterLinkWithHref]
+  imports: [IonicModule, CommonModule, FormsModule, RouterLinkWithHref],
+  providers: [UserService]
 })
+
 export class LoginPage implements OnInit, OnDestroy{
 
   userLoginModal: IUserLogin = {
