@@ -10,8 +10,7 @@ export class UserModel {
         public email: string,
         public username: string,
         public id_type: number,
-        public password: string,
-        public type: string
+        public password: string
     ) {
     }
 
