@@ -17,23 +17,23 @@
     </div>
   </div>
 
-  <h1 id="welcome" class="center-content" style="padding-bottom: 50px">Bienvenido {{ studentInfoReceived?.first_name }}</h1>
+  <h1 id="welcome" class="center-content" style="padding-bottom: 50px">Bienvenido {{ (studentInfoReceived$ | async )?.first_name }}</h1>
 
-  <ion-list [inset]="true">
+  <ion-list [inset]="true" *ngIf="studentInfoReceived$ | async as user">
     <ion-list-header>
       <ion-label>Datos: </ion-label>
     </ion-list-header>
     <ion-item>
-      <ion-label>Usuario: {{ studentInfoReceived?.username}}</ion-label>
+      <ion-label>Usuario: {{ user.username}}</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>Nombre: {{ studentInfoReceived?.first_name }}</ion-label>
+      <ion-label>Nombre: {{ user.first_name }}</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>Apellido: {{ studentInfoReceived?.p_last_name }}</ion-label>
+      <ion-label>Apellido: {{ user.p_last_name }}</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>Rut: {{ studentInfoReceived?.numrun }}
+      <ion-label>Rut: {{ user.numrun }}
       </ion-label>
     </ion-item>
   </ion-list>

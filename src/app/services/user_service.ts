@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { UserModel } from "../models/UserModel";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from "rxjs";
+import { Observable, map, catchError } from "rxjs";
 import { IUserLogin } from "../models/IUserLogin";
 
 
@@ -20,12 +20,24 @@ export class UserService {
         return this._httpclient.get<UserModel[]>(this.URL_SUPABASE, { headers: this.supabaseheaders, responseType: 'json' });
     }
 
-    getUser(email: string): Observable<UserModel> {
-        return this._httpclient.get<UserModel>(this.URL_SUPABASE+'Users?email=eq.'+ email, { headers: this.supabaseheaders.set('Accept', 'application/vnd.pgrst.object+json'), responseType: 'json' });
+    getUser(id: number): Observable<UserModel> {
+        return this._httpclient.get<UserModel>(this.URL_SUPABASE+'Users?numrun=eq.'+ id, { headers: this.supabaseheaders.set('Accept', 'application/vnd.pgrst.object+json'), responseType: 'json' });
     }
 
     getLoginUser(iUserLogin: IUserLogin): Observable<string | any> {
         return this._httpclient.get<any>(this.URL_SUPABASE + "Users?username=eq." + iUserLogin.username + "&password=eq." + iUserLogin.password, { headers: this.supabaseheaders.set('Accept', 'application/vnd.pgrst.object+json'), responseType: 'json' });
+    }
+
+    getLoginId(iUserLogin: IUserLogin): Observable<string | any> {
+        return this._httpclient.get<any>(this.URL_SUPABASE + "Users?username=eq." + iUserLogin.username + "&password=eq." + iUserLogin.password, { headers: this.supabaseheaders }).pipe(
+            map((user) => {
+                console.log(user[0].numrun);
+                return user[0].numrun;
+            }), catchError((err) => {
+                console.log(err)
+                return err;
+            })
+        );
     }
 
     getUserType(user_id: string){

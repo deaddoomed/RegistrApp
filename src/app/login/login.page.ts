@@ -30,7 +30,6 @@ export class LoginPage implements OnInit, OnDestroy{
 
   public userExists?: UserModel;
   public userList: UserModel[] = [];
-  public userList$!: Subscription;
   
   //REINICIA VARIABLE USERLOGINMODAL
   ngOnInit() {
@@ -53,12 +52,12 @@ export class LoginPage implements OnInit, OnDestroy{
     });
   }
 
-  //FUNCION DE LOGUEO
+  //FUNCION QUE PASA ID A LA SIGUIENTE PAGINA
   async userLogin(userLoginInfo: IUserLogin){
-    const user_info = await lastValueFrom(this._usuarioService.getLoginUser(userLoginInfo));
-    if(user_info){
-      this.route.navigate(['/usuario'], {state:{userInfo: user_info}})
-      console.log(user_info);
+    const user_id = await lastValueFrom(this._usuarioService.getLoginId(userLoginInfo));
+    console.log(user_id);
+    if(user_id){
+      this.route.navigate(['/alumno'], {state:{userInfo: user_id}})
     }
     else{
       console.log("usuario no encontrado");
