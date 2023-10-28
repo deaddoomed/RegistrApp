@@ -23,11 +23,12 @@
     <div id="content">
       <ion-input 
         class="center-content" 
-        label="Username" 
-        placeholder="Ingresa tu nombre de usuario"
+        label="Email" 
+        placeholder="Ingresa tu correo institucional"
         [clearInput]="true"
         labelPlacement="floating" 
-        [(ngModel)]="userLoginModal.username">
+        autocomplete="off"
+        [(ngModel)]="userLoginModal.email">
       </ion-input>
 
       <div>
@@ -41,6 +42,7 @@
         [clearInput]="true"
         type="Password"
         labelPlacement="floating"
+        autocomplete="off"
         [(ngModel)]="userLoginModal.password">
       </ion-input>
       

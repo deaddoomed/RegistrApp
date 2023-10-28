@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Router, RouterLinkWithHref } from '@angular/router';
 import { IUserLogin } from '../models/IUserLogin';
-import { Subscription, lastValueFrom } from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 import { UserService } from '../services/user_service';
 import { UserModel } from '../models/UserModel';
 import { Preferences } from '@capacitor/preferences';
@@ -22,7 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
 export class LoginPage implements OnInit, OnDestroy{
 
   userLoginModal: IUserLogin = {
-    username: '',
+    email: '',
     password: ''
   };
 
@@ -41,7 +41,7 @@ export class LoginPage implements OnInit, OnDestroy{
   }
 
   userLoginModalRestart(): void {
-    this.userLoginModal.username = '';
+    this.userLoginModal.email = '';
     this.userLoginModal.password = '';
   }
 
@@ -57,7 +57,14 @@ export class LoginPage implements OnInit, OnDestroy{
     const user_id = await lastValueFrom(this._usuarioService.getLoginId(userLoginInfo));
     console.log(user_id);
     if(user_id){
-      this.route.navigate(['/alumno'], {state:{userInfo: user_id}})
+      const user_type = await lastValueFrom(this._usuarioService.getUserType(user_id));
+      console.log(user_type);
+      if (user_type == 1){
+        this.route.navigate(['/alumno'], {state:{userInfo: user_id}})
+      }
+      if(user_type == 2){
+        this.route.navigate(['/docente'], {state:{userInfo: user_id}})
+      }      
     }
     else{
       console.log("usuario no encontrado");

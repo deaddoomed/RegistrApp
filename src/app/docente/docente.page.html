@@ -20,26 +20,26 @@
   <ion-card>
   
     <ion-card-header id="welcome">\
-      <ion-card-title class="center-content" style="padding-bottom: 50px">Bienvenido {{ teacherInfoReceived?.first_name }}</ion-card-title>
+      <ion-card-title class="center-content" style="padding-bottom: 50px">Bienvenido {{ (teacherInfoReceived$  | async )?.username }}</ion-card-title>
     </ion-card-header>
       
 
     <ion-card-content>
-      <ion-list [inset]="true">
+      <ion-list [inset]="true" *ngIf="teacherInfoReceived$ | async as user">
         <ion-list-header>
           <ion-label>Datos: </ion-label>
         </ion-list-header>
         <ion-item>
-          <ion-label>Usuario: {{ teacherInfoReceived?.username}}</ion-label>
+          <ion-label>Usuario: {{ user.username}}</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label>Nombre: {{ teacherInfoReceived?.first_name }}</ion-label>
+          <ion-label>Nombre: {{ user.first_name }}</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label>Apellido: {{ teacherInfoReceived?.p_last_name }}</ion-label>
+          <ion-label>Apellido: {{ user.p_last_name }}</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label>Rut: {{ teacherInfoReceived?.numrun }}
+          <ion-label>Rut: {{ user.numrun }}
           </ion-label>
         </ion-item>
       </ion-list>

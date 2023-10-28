@@ -25,11 +25,11 @@ export class UserService {
     }
 
     getLoginUser(iUserLogin: IUserLogin): Observable<string | any> {
-        return this._httpclient.get<any>(this.URL_SUPABASE + "Users?username=eq." + iUserLogin.username + "&password=eq." + iUserLogin.password, { headers: this.supabaseheaders.set('Accept', 'application/vnd.pgrst.object+json'), responseType: 'json' });
+        return this._httpclient.get<any>(this.URL_SUPABASE + "Users?email=eq." + iUserLogin.email + "&password=eq." + iUserLogin.password, { headers: this.supabaseheaders.set('Accept', 'application/vnd.pgrst.object+json'), responseType: 'json' });
     }
 
     getLoginId(iUserLogin: IUserLogin): Observable<string | any> {
-        return this._httpclient.get<any>(this.URL_SUPABASE + "Users?username=eq." + iUserLogin.username + "&password=eq." + iUserLogin.password, { headers: this.supabaseheaders }).pipe(
+        return this._httpclient.get<any>(this.URL_SUPABASE + "Users?email=eq." + iUserLogin.email + "&password=eq." + iUserLogin.password, { headers: this.supabaseheaders }).pipe(
             map((user) => {
                 console.log(user[0].numrun);
                 return user[0].numrun;
@@ -40,8 +40,14 @@ export class UserService {
         );
     }
 
-    getUserType(user_id: string){
-        return this._httpclient.get<any>(this.URL_SUPABASE+"users_type?username=eq."+user_id+"&select=id,created_at,user(*),type(*)", { headers: this.supabaseheaders})
-    }
-
+    getUserType(user_id: number){
+        return this._httpclient.get<any>(this.URL_SUPABASE+"Users?numrun=eq."+user_id, { headers: this.supabaseheaders}).pipe(
+            map((user) => {
+                console.log(user[0].id_type);
+                return user[0].id_type;
+            }), catchError((err) => {
+                console.log(err)
+                return err;
+            })
+        )}
 }
