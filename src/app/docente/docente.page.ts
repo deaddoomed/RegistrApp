@@ -5,9 +5,11 @@ import { IonicModule } from '@ionic/angular';
 import { UserModel } from '../models/UserModel';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user_service';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
+import { lastValueFrom } from 'rxjs';
 import { AttendanceModel } from '../models/AttendanceModel';
+import { ListsModel } from '../models/ListsModel';
 import { AttendanceService } from '../services/attendance_service';
 
 @Component({
@@ -16,7 +18,7 @@ import { AttendanceService } from '../services/attendance_service';
   styleUrls: ['./docente.page.scss'],
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule, HttpClientModule],
-  providers: [UserService]
+  providers: [UserService, AttendanceService]
 })
 
 export class DocentePage implements OnInit {
@@ -25,7 +27,7 @@ export class DocentePage implements OnInit {
   idUserHtmlRouterLink: any;
   user_id!: number;
   userList: any;
-  show: any;
+  show: Observable<any> ;
 
   constructor(private route : Router, private _userService: UserService, private _attendanceService : AttendanceService) {
     this.user_id = this.route.getCurrentNavigation()?.extras.state?.['userInfo'];
@@ -42,7 +44,7 @@ export class DocentePage implements OnInit {
   }
 
   async createAttendance( ) {
-    console.log(this.show);
+     console.log(this._attendanceService.getClasses());
   }
 
 }

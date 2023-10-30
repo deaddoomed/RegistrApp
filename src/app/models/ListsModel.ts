@@ -1,9 +1,9 @@
 export class ListsModel {
 
     constructor(
-        public class_code: string,
-        public section: string,
-        public rut_student: number,
+        public id: number,
+        public cod_class: number,
+        public numrun: number,
     ) {
     }
 

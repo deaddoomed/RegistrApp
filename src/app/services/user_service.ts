@@ -22,11 +22,11 @@ export class UserService {
         return this._httpclient.get<UserModel>(this.URL_SUPABASE+'Users?numrun=eq.'+ id, { headers: this.supabaseheaders.set('Accept', 'application/vnd.pgrst.object+json'), responseType: 'json' });
     }
 
-    getLoginUser(iUserLogin: IUserLogin): Observable<string | any> {
+    getLoginUser(iUserLogin: IUserLogin): Observable<any> {
         return this._httpclient.get<any>(this.URL_SUPABASE + "Users?email=eq." + iUserLogin.email + "&password=eq." + iUserLogin.password, { headers: this.supabaseheaders.set('Accept', 'application/vnd.pgrst.object+json'), responseType: 'json' });
     }
 
-    getLoginId(iUserLogin: IUserLogin): Observable<string | any> {
+    getLoginId(iUserLogin: IUserLogin): Observable<number | any> {
         return this._httpclient.get<any>(this.URL_SUPABASE + "Users?email=eq." + iUserLogin.email + "&password=eq." + iUserLogin.password, { headers: this.supabaseheaders }).pipe(
             map((user) => {
                 console.log(user[0].numrun);
