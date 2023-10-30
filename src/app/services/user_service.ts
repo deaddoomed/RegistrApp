@@ -8,12 +8,10 @@ import { IUserLogin } from "../models/IUserLogin";
 @Injectable({ providedIn: 'root' })
 export class UserService {
 
-    URL_SUPABASE = 'https://durbxicxcabbrhwftadv.supabase.co/rest/v1/'
-
-
     constructor(private _httpclient: HttpClient) {
     }
 
+    URL_SUPABASE = 'https://durbxicxcabbrhwftadv.supabase.co/rest/v1/'
     supabaseheaders = new HttpHeaders().set('apikey','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR1cmJ4aWN4Y2FiYnJod2Z0YWR2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTU0NzExOTksImV4cCI6MjAxMTA0NzE5OX0.NASHfj0II-9NVlMW7OBzBXdRYCfg6OwTsEloibW8pB0')
 
     getUserList(): Observable<UserModel[]> {

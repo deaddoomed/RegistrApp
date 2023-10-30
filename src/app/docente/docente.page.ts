@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { UserService } from '../services/user_service';
 import { Observable } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
+import { AttendanceModel } from '../models/AttendanceModel';
+import { AttendanceService } from '../services/attendance_service';
 
 @Component({
   selector: 'app-docente',
@@ -23,11 +25,13 @@ export class DocentePage implements OnInit {
   idUserHtmlRouterLink: any;
   user_id!: number;
   userList: any;
+  show: any;
 
-  constructor(private route : Router, private _userService: UserService) {
+  constructor(private route : Router, private _userService: UserService, private _attendanceService : AttendanceService) {
     this.user_id = this.route.getCurrentNavigation()?.extras.state?.['userInfo'];
     console.log(this.user_id);
     this.teacherInfoReceived$ = this._userService.getUser(this.user_id);
+    this.show = this._attendanceService.getClasses();
   }
 
   ngOnInit() {
@@ -35,6 +39,10 @@ export class DocentePage implements OnInit {
 
   backLogin() {
     this.route.navigate(['/login']);
+  }
+
+  async createAttendance( ) {
+    console.log(this.show);
   }
 
 }

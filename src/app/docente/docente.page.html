@@ -30,13 +30,7 @@
           <ion-label>Datos: </ion-label>
         </ion-list-header>
         <ion-item>
-          <ion-label>Usuario: {{ user.username}}</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>Nombre: {{ user.first_name }}</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>Apellido: {{ user.p_last_name }}</ion-label>
+          <ion-label>Nombre: {{ user.first_name }} {{ user.second_name }} {{ user.p_last_name }} {{ user.m_last_name }}</ion-label>
         </ion-item>
         <ion-item>
           <ion-label>Rut: {{ user.numrun }}
@@ -45,5 +39,11 @@
       </ion-list>
     </ion-card-content>
   </ion-card>
+
+  <div>
+    <div>
+      <ion-button (click)="createAttendance()">Crear asistencia</ion-button>
+    </div>
+  </div>
 
 </ion-content>
