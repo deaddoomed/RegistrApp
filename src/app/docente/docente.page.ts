@@ -7,10 +7,8 @@ import { Router } from '@angular/router';
 import { UserService } from '../services/user_service';
 import { Observable, map } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
-import { lastValueFrom } from 'rxjs';
-import { AttendanceModel } from '../models/AttendanceModel';
-import { ListsModel } from '../models/ListsModel';
 import { AttendanceService } from '../services/attendance_service';
+import { IAttendance } from '../models/IAttendance';
 
 @Component({
   selector: 'app-docente',
@@ -27,13 +25,16 @@ export class DocentePage implements OnInit {
   idUserHtmlRouterLink: any;
   user_id!: number;
   userList: any;
-  show: Observable<any> ;
+  attendance: IAttendance = {
+    date: '',
+    numrun: 0,
+    cod_class: 0
+  };
 
   constructor(private route : Router, private _userService: UserService, private _attendanceService : AttendanceService) {
     this.user_id = this.route.getCurrentNavigation()?.extras.state?.['userInfo'];
     console.log(this.user_id);
     this.teacherInfoReceived$ = this._userService.getUser(this.user_id);
-    this.show = this._attendanceService.getClasses();
   }
 
   ngOnInit() {
@@ -43,8 +44,10 @@ export class DocentePage implements OnInit {
     this.route.navigate(['/login']);
   }
 
-  async createAttendance( ) {
-     console.log(this._attendanceService.getClasses());
+  createAttendance(attendanceInfo : IAttendance) {
+     attendanceInfo = this.attendance;
+     this._attendanceService.generateAttendance(attendanceInfo);
+     console.log(this.attendance);
   }
 
 }

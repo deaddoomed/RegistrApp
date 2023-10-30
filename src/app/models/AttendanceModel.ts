@@ -1,10 +1,9 @@
 export class AttendanceModel {
 
     constructor(
-        public date: Date,
-        public state: number,
+        public date: string,
         public numrun: number,
-        public cod_subject: number
+        public cod_class: number
     ) {
     }
 

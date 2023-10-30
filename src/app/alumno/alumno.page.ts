@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../services/user_service';
 import { Observable } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
+import { AttendanceService } from '../services/attendance_service';
 
 @Component({
   selector: 'app-alumno',
@@ -14,7 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
   styleUrls: ['./alumno.page.scss'],
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule, HttpClientModule],
-  providers: [UserService]
+  providers: [UserService, AttendanceService]
 })
 
 export class AlumnoPage implements OnInit {
@@ -23,8 +24,10 @@ export class AlumnoPage implements OnInit {
   idUserHtmlRouterLink: any;
   user_id!: number;
   userList: any;
+  attendance_id: number = 0;
+  class_id: number = 0;
 
-  constructor(private route : Router, private _userService: UserService) {
+  constructor(private route : Router, private _userService: UserService, private _attendanceService : AttendanceService) {
     this.user_id = this.route.getCurrentNavigation()?.extras.state?.['userInfo'];
     console.log(this.user_id);
     this.studentInfoReceived$ = this._userService.getUser(this.user_id);
@@ -36,5 +39,13 @@ export class AlumnoPage implements OnInit {
   backLogin() {
     this.route.navigate(['/login']);
   }
+
+  updateAttendance(attendance_id : number) {
+    this._attendanceService.registerAttendance(attendance_id);
+  }
+
+ searchAttendance() {
+  this.route.navigate(['/attendance']), {state:{classInfo: this.class_id}};
+}
 
 }

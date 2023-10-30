@@ -18,12 +18,17 @@ export class AttendanceService {
     return this._httpclient.post<any>(this.URL_SUPABASE+'Attendance',attendance,{headers: this.supabaseheaders});
   }
 
-  registerAttendance(date: string, cod_class: number, id_user: number): Observable<any>{
-    return this._httpclient.patch<any>(this.URL_SUPABASE+'Attendance?date=eq.'+date+'&cod_subject=eq.'+cod_class+'&numrun=eq.'+id_user, {"state": true} ,{headers: this.supabaseheaders});
+  registerAttendance(id: number):void{
+    console.log(id);
+    this._httpclient.patch(this.URL_SUPABASE+'Attendance?id=eq.'+id, {"state": true} ,{headers: this.supabaseheaders});
   }
 
   getClasses(): Observable<ListsModel[]>{
     return this._httpclient.get<ListsModel[]>(this.URL_SUPABASE, { headers: this.supabaseheaders});
+  }
+
+  getAttendance(class_id: number): Observable<any> {
+    return this._httpclient.get<any>(this.URL_SUPABASE+'Attendance?cod_class=eq.'+class_id, { headers: this.supabaseheaders});
   }
 
 }

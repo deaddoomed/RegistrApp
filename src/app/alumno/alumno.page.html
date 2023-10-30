@@ -32,6 +32,40 @@
     </ion-item>
   </ion-list>
 
+  <div id="content">
+    <ion-input 
+      class="center-content" 
+      label="id" 
+      type="number"
+      [clearInput]="true"
+      labelPlacement="floating" 
+      [(ngModel)]="attendance_id">
+    </ion-input>    
+  </div>
+
+  <div>
+    <div>
+      <ion-button (click)="updateAttendance(attendance_id)">Registrar asistencia</ion-button>
+    </div>
+  </div>
+
+  <div id="content">
+    <ion-input 
+      class="center-content" 
+      label="clase" 
+      type="number"
+      [clearInput]="true"
+      labelPlacement="floating" 
+      [(ngModel)]="class_id">
+    </ion-input>    
+  </div>
+
+  <div>
+    <div>
+      <ion-button (click)="searchAttendance()">Buscar asistencia</ion-button>
+    </div>
+  </div>
+
 
 
 </ion-content>
