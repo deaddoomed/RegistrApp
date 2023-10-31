@@ -41,10 +41,11 @@ export class AlumnoPage implements OnInit {
   }
 
   updateAttendance(attendance_id : number) {
-    this._attendanceService.registerAttendance(attendance_id);
+    this._attendanceService.registerAttendance(attendance_id).subscribe((data) => {});
   }
 
  searchAttendance() {
+  console.log(this._attendanceService.getAttendance(this.class_id));
   this.route.navigate(['/attendance']), {state:{classInfo: this.class_id}};
 }
 

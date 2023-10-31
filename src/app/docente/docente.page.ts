@@ -46,8 +46,8 @@ export class DocentePage implements OnInit {
 
   createAttendance(attendanceInfo : IAttendance) {
      attendanceInfo = this.attendance;
-     this._attendanceService.generateAttendance(attendanceInfo);
-     console.log(this.attendance);
+     this._attendanceService.generateAttendance(attendanceInfo).subscribe((data) => {console.log(data)});
+     console.log(JSON.stringify(this.attendance));
   }
 
 }
