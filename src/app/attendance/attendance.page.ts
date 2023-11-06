@@ -22,16 +22,20 @@ export class AttendancePage implements OnInit {
 
   //attendanceInfoReceived$: Observable<AttendanceModel>;
   idUserHtmlRouterLink: any;
-  attendanceInfo: AttendanceModel;
+  attendanceInfo: IAttendance={
+    date:"",
+    numrun:0,
+    cod_class:0,
+  }
 
   constructor(private route : Router, private _userService: UserService, private _attendanceService : AttendanceService) {
-    this.attendanceInfo = this.route.getCurrentNavigation()?.extras.state?.['classInfo'];
-    console.log("attedanceInfo: "+this.attendanceInfo);
+    //this.attendanceInfo = this.route.getCurrentNavigation()?.extras.state?.['classInfo'];    
     //this.attendanceInfoReceived$ = this._attendanceService.getAttendance(this.attendanceInfo);
-    console.log("classid: "+this.attendanceInfo);
    }
 
   ngOnInit() {
+    this.attendanceInfo = this.route.getCurrentNavigation()?.extras.state?.['classInfo'];
+    console.log("attedanceInfo: "+this.attendanceInfo);
   }
 
 

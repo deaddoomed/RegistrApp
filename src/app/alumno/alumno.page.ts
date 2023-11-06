@@ -50,7 +50,7 @@ export class AlumnoPage implements OnInit {
     this.attendance_id = 0;
   }
 
- searchAttendance() {
+ async searchAttendance() {
     console.log(this.attedanceModal);
     this.route.navigate(['/attendance']), {state:{classInfo: this.attedanceModal}};
 }
