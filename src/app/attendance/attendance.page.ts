@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
 import { AttendanceService } from '../services/attendance_service';
 import { AttendanceModel } from '../models/AttendanceModel';
+import { IAttendance } from '../models/IAttendance';
 
 @Component({
   selector: 'app-attendance',
@@ -21,13 +22,13 @@ export class AttendancePage implements OnInit {
 
   //attendanceInfoReceived$: Observable<AttendanceModel>;
   idUserHtmlRouterLink: any;
-  attendanceInfo: number;
-  class_id: number = 0;
+  attendanceInfo: AttendanceModel;
 
   constructor(private route : Router, private _userService: UserService, private _attendanceService : AttendanceService) {
     this.attendanceInfo = this.route.getCurrentNavigation()?.extras.state?.['classInfo'];
-    console.log(this.attendanceInfo);
-    //this.attendanceInfoReceived$ = this._attendanceService.getAttendance(this.class_id);
+    console.log("attedanceInfo: "+this.attendanceInfo);
+    //this.attendanceInfoReceived$ = this._attendanceService.getAttendance(this.attendanceInfo);
+    console.log("classid: "+this.attendanceInfo);
    }
 
   ngOnInit() {
@@ -35,6 +36,6 @@ export class AttendancePage implements OnInit {
 
 
   backStudent() {
-    this.route.navigate(['/alumno']);
+    this.route.navigate(['/alumno'], {state:{userInfo: 11222333}})
   }
 }

@@ -37,7 +37,7 @@ export class LoginPage implements OnInit, OnDestroy{
   }
 
   ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
+    //throw new Error('Method not implemented.');
   }
 
   userLoginModalRestart(): void {
@@ -55,10 +55,10 @@ export class LoginPage implements OnInit, OnDestroy{
   //FUNCION QUE PASA ID A LA SIGUIENTE PAGINA
   async userLogin(userLoginInfo: IUserLogin){
     const user_id = await lastValueFrom(this._usuarioService.getLoginId(userLoginInfo));
-    console.log(user_id);
+    console.log("userid :"+user_id);
     if(user_id){
       const user_type = await lastValueFrom(this._usuarioService.getUserType(user_id));
-      console.log(user_type);
+      console.log("usertype :"+user_type);
       if (user_type == 1){
         this.route.navigate(['/alumno'], {state:{userInfo: user_id}})
       }
@@ -67,6 +67,7 @@ export class LoginPage implements OnInit, OnDestroy{
       }      
     }
     else{
+      window.alert("Credenciales Incorrectas");
       console.log("usuario no encontrado");
     }
   }

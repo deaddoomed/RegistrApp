@@ -56,13 +56,13 @@
       type="number"
       [clearInput]="true"
       labelPlacement="floating" 
-      [(ngModel)]="class_id">
+      [(ngModel)]="attedanceModal.cod_class">
     </ion-input>    
   </div>
 
   <div>
     <div>
-      <ion-button (click)="searchAttendance(class_id)">Buscar asistencia</ion-button>
+      <ion-button (click)="searchAttendance()">Buscar asistencia</ion-button>
     </div>
   </div>
 

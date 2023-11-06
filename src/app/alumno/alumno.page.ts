@@ -8,6 +8,7 @@ import { UserService } from '../services/user_service';
 import { Observable } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
 import { AttendanceService } from '../services/attendance_service';
+import { IAttendance } from '../models/IAttendance';
 
 @Component({
   selector: 'app-alumno',
@@ -25,12 +26,16 @@ export class AlumnoPage implements OnInit {
   user_id!: number;
   userList: any;
   attendance_id: number = 0;
-  class_id: number = 0;
+  attedanceModal: IAttendance={
+    date:"",
+    numrun:0,
+    cod_class:0,
+  }
 
   constructor(private route : Router, private _userService: UserService, private _attendanceService : AttendanceService) {
-    this.user_id = this.route.getCurrentNavigation()?.extras.state?.['userInfo'];
-    console.log(this.user_id);
-    this.studentInfoReceived$ = this._userService.getUser(this.user_id);
+    this.attedanceModal.numrun = this.route.getCurrentNavigation()?.extras.state?.['userInfo'];
+    console.log("userid: "+this.attedanceModal.numrun );
+    this.studentInfoReceived$ = this._userService.getUser(this.attedanceModal.numrun );
   }
 
   ngOnInit() {
@@ -40,13 +45,14 @@ export class AlumnoPage implements OnInit {
     this.route.navigate(['/login']);
   }
 
-  updateAttendance(attendance_id : number) {
+  updateAttendance(attendance_id: number) {
     this._attendanceService.registerAttendance(attendance_id).subscribe((data) => {});
+    this.attendance_id = 0;
   }
 
- searchAttendance(class_id:number) {
-    console.log(class_id);
-    this.route.navigate(['/attendance']), {state:{classInfo: class_id}};
+ searchAttendance() {
+    console.log(this.attedanceModal);
+    this.route.navigate(['/attendance']), {state:{classInfo: this.attedanceModal}};
 }
 
 }

@@ -33,7 +33,7 @@ export class DocentePage implements OnInit {
 
   constructor(private route : Router, private _userService: UserService, private _attendanceService : AttendanceService) {
     this.user_id = this.route.getCurrentNavigation()?.extras.state?.['userInfo'];
-    console.log(this.user_id);
+    console.log("userid :"+this.user_id);
     this.teacherInfoReceived$ = this._userService.getUser(this.user_id);
   }
 
@@ -47,7 +47,7 @@ export class DocentePage implements OnInit {
   createAttendance(attendanceInfo : IAttendance) {
      attendanceInfo = this.attendance;
      this._attendanceService.generateAttendance(attendanceInfo).subscribe((data) => {console.log(data)});
-     console.log(JSON.stringify(this.attendance));
+     console.log("attendancedata :"+JSON.stringify(this.attendance));
   }
 
 }

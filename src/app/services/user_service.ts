@@ -29,7 +29,7 @@ export class UserService {
     getLoginId(iUserLogin: IUserLogin): Observable<number | any> {
         return this._httpclient.get<any>(this.URL_SUPABASE + "Users?email=eq." + iUserLogin.email + "&password=eq." + iUserLogin.password, { headers: this.supabaseheaders }).pipe(
             map((user) => {
-                console.log(user[0].numrun);
+                console.log("userid :"+user[0].numrun);
                 return user[0].numrun;
             }), catchError((err) => {
                 console.log(err)
@@ -41,7 +41,7 @@ export class UserService {
     getUserType(user_id: number){
         return this._httpclient.get<any>(this.URL_SUPABASE+"Users?numrun=eq."+user_id, { headers: this.supabaseheaders}).pipe(
             map((user) => {
-                console.log(user[0].id_type);
+                console.log("usertype :"+user[0].id_type);
                 return user[0].id_type;
             }), catchError((err) => {
                 console.log(err)

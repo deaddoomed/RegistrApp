@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AttendanceModel } from '../models/AttendanceModel';
 import { Observable } from 'rxjs';
+import { IAttendance } from '../models/IAttendance';
 
 @Injectable({  providedIn: 'root'})
 export class AttendanceService {
@@ -17,7 +18,7 @@ export class AttendanceService {
   }
 
   registerAttendance(id: number):Observable<any>{
-    console.log(id);
+    console.log("attendanceid :"+id);
     return this._httpclient.patch(this.URL_SUPABASE+'Attendance?id=eq.'+id, {"state": true} ,{headers: this.supabaseheaders,responseType: 'json'});
   }
 
@@ -25,8 +26,8 @@ export class AttendanceService {
     return this._httpclient.get<any>(this.URL_SUPABASE+'Classes', { headers: this.supabaseheaders, responseType: 'json'});
   }
 
-  getAttendance(class_id: number): Observable<any> {
-    return this._httpclient.get(this.URL_SUPABASE+'Attendance?cod_class=eq.'+class_id, { headers: this.supabaseheaders, responseType: 'json'});
+  getAttendance(attendance: IAttendance): Observable<any> {
+    return this._httpclient.get(this.URL_SUPABASE+'Attendance?cod_class=eq.'+attendance.cod_class, { headers: this.supabaseheaders, responseType: 'json'});
   }
 
 }
