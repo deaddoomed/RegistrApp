@@ -26,8 +26,10 @@ export class AttendanceService {
     return this._httpclient.get<any>(this.URL_SUPABASE+'Classes', { headers: this.supabaseheaders, responseType: 'json'});
   }
 
-  getAttendance(attendance: IAttendance): Observable<any> {
-    return this._httpclient.get(this.URL_SUPABASE+'Attendance?cod_class=eq.'+attendance.cod_class, { headers: this.supabaseheaders, responseType: 'json'});
+  getAttendance(cod_class: number, numrun: number): Observable<any> {
+    const cosa = this._httpclient.get(this.URL_SUPABASE+'Attendance?cod_class=eq.'+cod_class+'&numrun=eq.'+numrun, { headers: this.supabaseheaders, responseType: 'json'});
+    console.log(cosa);
+    return cosa
   }
 
 }

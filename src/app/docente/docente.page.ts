@@ -44,9 +44,8 @@ export class DocentePage implements OnInit {
     this.route.navigate(['/login']);
   }
 
-  createAttendance(attendanceInfo : IAttendance) {
-     attendanceInfo = this.attendance;
-     this._attendanceService.generateAttendance(attendanceInfo).subscribe((data) => {console.log(data)});
+  createAttendance() {
+     this._attendanceService.generateAttendance(this.attendance).subscribe((data) => {console.log(data)});
      console.log("attendancedata :"+JSON.stringify(this.attendance));
   }
 
