@@ -36,6 +36,7 @@ export class AlumnoPage implements OnInit {
     this.attedanceModal.numrun = this.route.getCurrentNavigation()?.extras.state?.['userInfo'];
     console.log("userid: "+this.attedanceModal.numrun );
     this.studentInfoReceived$ = this._userService.getUser(this.attedanceModal.numrun );
+    console.log("studentInfoReceived :"+JSON.stringify(this.studentInfoReceived$));
   }
 
   ngOnInit() {

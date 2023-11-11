@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AttendanceModel } from '../models/AttendanceModel';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { IAttendance } from '../models/IAttendance';
 
 @Injectable({  providedIn: 'root'})
@@ -27,9 +27,7 @@ export class AttendanceService {
   }
 
   getAttendance(cod_class: number, numrun: number): Observable<any> {
-    const cosa = this._httpclient.get(this.URL_SUPABASE+'Attendance?cod_class=eq.'+cod_class+'&numrun=eq.'+numrun, { headers: this.supabaseheaders, responseType: 'json'});
-    console.log(cosa);
-    return cosa
+    return this._httpclient.get(this.URL_SUPABASE+'Attendance?cod_class=eq.'+cod_class+'&numrun=eq.'+numrun, { headers: this.supabaseheaders, responseType: 'json'});
   }
 
 }

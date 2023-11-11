@@ -31,6 +31,9 @@ export class AttendancePage implements OnInit {
   constructor(private route : Router, private _userService: UserService, private _attendanceService : AttendanceService) {
     this.attendanceInfo = this.route.getCurrentNavigation()?.extras.state?.['classInfo'];    
     this.attendanceInfoReceived$ = this._attendanceService.getAttendance(this.attendanceInfo.cod_class,this.attendanceInfo.numrun);
+    console.log("attendanceInfo.cod_class: "+this.attendanceInfo.cod_class+", attendanceInfo.numrun: "+this.attendanceInfo.numrun);
+    console.log("attendanceInfoReceived: "+JSON.stringify(this.attendanceInfoReceived$));
+    this.attendanceInfoReceived$.subscribe((data : any)=>console.log(data));
    }
 
   ngOnInit() {
