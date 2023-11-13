@@ -17,14 +17,12 @@
     </div>
   </div>
 
-  {{attendanceInfoReceived$}}
- <!-- <ion-card>
-    <ion-card-content>
-        <ion-list>
-          <ion-item *ngFor="let attendance of attendanceInfoReceived$">
-            Fecha: {{ attendance.date }}<br>
-            Asistencia: {{ attendance.state }}<br>
-          </ion-item>
-        </ion-list>
-    </ion-card-content>
-  </ion-card> -->
+  <ion-card>
+      <ion-card-content>
+          <ion-list>
+            <ion-item *ngFor="let attendance of attendanceInfoReceived$">
+              Fecha: {{ attendance.date }} Asistencia: {{ attendance.state }}<br>
+            </ion-item>
+          </ion-list>
+      </ion-card-content>
+  </ion-card>

@@ -20,7 +20,7 @@ import { IAttendance } from '../models/IAttendance';
 })
 export class AttendancePage implements OnInit {
 
-  attendanceInfoReceived$: any;
+  attendanceInfoReceived$: any[] = [];
   idUserHtmlRouterLink: any;
   attendanceInfo: IAttendance={
     date:"",
@@ -30,18 +30,23 @@ export class AttendancePage implements OnInit {
 
   constructor(private route : Router, private _userService: UserService, private _attendanceService : AttendanceService) {
     this.attendanceInfo = this.route.getCurrentNavigation()?.extras.state?.['classInfo'];    
-    this.attendanceInfoReceived$ = this._attendanceService.getAttendance(this.attendanceInfo.cod_class,this.attendanceInfo.numrun);
-    console.log("attendanceInfo.cod_class: "+this.attendanceInfo.cod_class+", attendanceInfo.numrun: "+this.attendanceInfo.numrun);
-    console.log("attendanceInfoReceived: "+JSON.stringify(this.attendanceInfoReceived$));
-    this.attendanceInfoReceived$.subscribe((data : any)=>console.log(data));
+    this._attendanceService.getAttendance(this.attendanceInfo.cod_class,this.attendanceInfo.numrun).subscribe(
+      (data : any) => {
+        for(let i in data){
+            this.attendanceInfoReceived$.push(data[i]);
+            console.log(data[i]);
+          }           
+        } 
+      );
+    console.log("attendanceInfo.cod_class: "+ this.attendanceInfo.cod_class+", attendanceInfo.numrun: "+this.attendanceInfo.numrun);
    }
 
   ngOnInit() {
-        
+     
   }
 
 
   backStudent() {
-    this.route.navigate(['/alumno'], {state:{userInfo: 11222333}})
+    this.route.navigate(['/alumno'], {state:{userInfo: this.attendanceInfo.numrun}})
   }
 }
