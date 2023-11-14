@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AttendanceModel } from '../models/AttendanceModel';
 import { Observable, map } from 'rxjs';
-import { IAttendance } from '../models/IAttendance';
 
 @Injectable({  providedIn: 'root'})
 export class AttendanceService {
@@ -28,6 +27,23 @@ export class AttendanceService {
 
   getAttendance(cod_class: number, numrun: number): Observable<any> {
     return this._httpclient.get(this.URL_SUPABASE+'Attendance?cod_class=eq.'+cod_class+'&numrun=eq.'+numrun, { headers: this.supabaseheaders, responseType: 'json'});
+  }
+
+  getSubjectId(cod_class: number) {
+      console.log("cod_class: "+cod_class);
+      return this._httpclient.get(this.URL_SUPABASE+'Class?cod_class=eq.'+cod_class, { headers: this.supabaseheaders}).pipe(
+      map((clase:any) => {
+        console.log("classReceived: "+clase);
+        return clase[0].cod_subject;
+      }))
+  }
+
+  getSubjectName(cod_subject: number){
+    return this._httpclient.get(this.URL_SUPABASE+'Subject?cod_subject=eq.'+cod_subject, { headers: this.supabaseheaders}).pipe(
+      map((subject:any) => {
+        return subject[0].subject_name;
+      })
+    );
   }
 
 }

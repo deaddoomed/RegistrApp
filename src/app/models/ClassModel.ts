@@ -1,11 +1,13 @@
+import { Time } from "@angular/common";
+
 export class ClassModel {
 
     constructor(
-        public name: string,
-        public class_code: string,
-        public rut_teacher: number,
-        public section: string,
-        public career_code: string
+        public cod_class: number,
+        public day: string,
+        public hour: Time,
+        public numrun: number,
+        public cod_subject: number
     ) {
     }
 

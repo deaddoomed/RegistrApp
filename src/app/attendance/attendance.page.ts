@@ -22,6 +22,7 @@ export class AttendancePage implements OnInit {
 
   attendanceInfoReceived$: any[] = [];
   idUserHtmlRouterLink: any;
+  subjectnameModal: any;
   attendanceInfo: IAttendance={
     date:"",
     numrun:0,
@@ -39,6 +40,16 @@ export class AttendancePage implements OnInit {
         } 
       );
     console.log("attendanceInfo.cod_class: "+ this.attendanceInfo.cod_class+", attendanceInfo.numrun: "+this.attendanceInfo.numrun);
+    this._attendanceService.getSubjectId(this.attendanceInfo.cod_class).subscribe(
+      (data)=>{
+        console.log("data: "+data+" "+typeof(data));
+        this._attendanceService.getSubjectName(data).subscribe(
+          (data)=>{
+            this.subjectnameModal=data;
+          }
+        );
+      }
+    );
    }
 
   ngOnInit() {
