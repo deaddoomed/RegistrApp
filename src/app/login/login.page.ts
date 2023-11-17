@@ -33,16 +33,12 @@ export class LoginPage implements OnInit, OnDestroy{
   
   //REINICIA VARIABLE USERLOGINMODAL
   ngOnInit() {
-    this.userLoginModalRestart();
+    this.userLoginModal.email = '';
+    this.userLoginModal.password = '';
   }
 
   ngOnDestroy(): void {
     //throw new Error('Method not implemented.');
-  }
-
-  userLoginModalRestart(): void {
-    this.userLoginModal.email = '';
-    this.userLoginModal.password = '';
   }
 
   async setObject(user: UserModel) {
@@ -55,14 +51,14 @@ export class LoginPage implements OnInit, OnDestroy{
   //FUNCION QUE PASA ID A LA SIGUIENTE PAGINA
   async userLogin(userLoginInfo: IUserLogin){
     const user_id = await lastValueFrom(this._usuarioService.getLoginId(userLoginInfo));
-    console.log("userid :"+user_id);
     if(user_id){
       const user_type = await lastValueFrom(this._usuarioService.getUserType(user_id));
-      console.log("usertype :"+user_type);
       if (user_type == 1){
+        console.log("usertype : alumno("+user_type+")");
         this.route.navigate(['/alumno'], {state:{userInfo: user_id}})
       }
       if(user_type == 2){
+        console.log("usertype : alumno("+user_type+")");
         this.route.navigate(['/docente'], {state:{userInfo: user_id}})
       }      
     }

@@ -21,8 +21,7 @@
   
     <ion-card-header id="welcome">\
       <ion-card-title class="center-content" style="padding-bottom: 50px">Bienvenido {{ (teacherInfoReceived$  | async )?.username }}</ion-card-title>
-    </ion-card-header>
-      
+    </ion-card-header>      
 
     <ion-card-content>
       <ion-list [inset]="true" *ngIf="teacherInfoReceived$ | async as user">
@@ -38,9 +37,19 @@
         </ion-item>
       </ion-list>
     </ion-card-content>
+
   </ion-card>
 
-  <div id="content">
+  <ion-list>
+    <ion-item *ngFor="let subject of subjectsInfo$">
+      <ion-card (click)="createAttendance(subject.cod_subject)">  
+        <ion-label>{{ subject.cod_subject }}</ion-label>
+        <ion-label>{{ subject.day }}</ion-label>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+
+  <!-- <div id="content">
     <ion-input 
       class="center-content" 
       label="date" 
@@ -74,6 +83,6 @@
     <div>
       <ion-button (click)="createAttendance()">Crear asistencia</ion-button>
     </div>
-  </div>
+  </div> -->
 
 </ion-content>

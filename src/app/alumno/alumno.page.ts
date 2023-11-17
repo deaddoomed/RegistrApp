@@ -22,24 +22,40 @@ import { IAttendance } from '../models/IAttendance';
 export class AlumnoPage implements OnInit {
 
   studentInfoReceived$: Observable<UserModel>;
+  subjectsInfoReceived$: any[] = [];
   idUserHtmlRouterLink: any;
-  user_id!: number;
   userList: any;
   attendance_id: number = 0;
   attedanceModal: IAttendance={
-    date:"",
     numrun:0,
-    cod_class:0,
+    cod_subject:0,
   }
 
   constructor(private route : Router, private _userService: UserService, private _attendanceService : AttendanceService) {
     this.attedanceModal.numrun = this.route.getCurrentNavigation()?.extras.state?.['userInfo'];
+
+    //GETTING USER INFO
+    this.studentInfoReceived$ = this._userService.getUser(this.attedanceModal.numrun);
+
+    //GETTING USER SUBJECTS
+    this._attendanceService.getSubjects(this.attedanceModal.numrun).subscribe(
+      (subjects : any) => {
+        for(let s in subjects){
+            this._attendanceService.getSubjectInfo(subjects[s].cod_subject).subscribe(
+              (data) =>{
+                this.subjectsInfoReceived$.push(data[0]);
+                console.log(data);
+              })
+        }}
+    );
+
+    //CONSOLE LOGS
     console.log("userid: "+this.attedanceModal.numrun );
-    this.studentInfoReceived$ = this._userService.getUser(this.attedanceModal.numrun );
-    console.log("studentInfoReceived :"+JSON.stringify(this.studentInfoReceived$));
+    
   }
 
   ngOnInit() {
+
   }
 
   backLogin() {
@@ -51,8 +67,8 @@ export class AlumnoPage implements OnInit {
     this.attendance_id = 0;
   }
 
- searchAttendance() {
-    console.log("attendanceModal: "+this.attedanceModal);
+ searchAttendance(cod_subject: number) {
+    this.attedanceModal.cod_subject = cod_subject;
     this.route.navigate(['/attendance'], {state:{classInfo: this.attedanceModal}});
 }
 

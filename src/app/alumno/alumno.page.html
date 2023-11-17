@@ -32,6 +32,16 @@
     </ion-item>
   </ion-list>
 
+  <ion-list>
+    <ion-item *ngFor="let subject of subjectsInfoReceived$">
+      <ion-card (click)="searchAttendance(subject.cod_subject)">  
+        <ion-label>{{ subject.subject_name }}</ion-label>
+        <ion-label>{{ subject.subject_short }}{{ subject.cod_subject }}</ion-label>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+
+
   <div id="content">
     <ion-input 
       class="center-content" 
@@ -48,24 +58,6 @@
       <ion-button (click)="updateAttendance(attendance_id)">Registrar asistencia</ion-button>
     </div>
   </div>
-
-  <div id="content">
-    <ion-input 
-      class="center-content" 
-      label="clase" 
-      type="number"
-      [clearInput]="true"
-      labelPlacement="floating" 
-      [(ngModel)]="attedanceModal.cod_class">
-    </ion-input>    
-  </div>
-
-  <div>
-    <div>
-      <ion-button (click)="searchAttendance()">Buscar asistencia</ion-button>
-    </div>
-  </div>
-
 
 
 </ion-content>
