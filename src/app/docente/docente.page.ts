@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AttendanceService } from '../services/attendance_service';
 import { IAttendance } from '../models/IAttendance';
 import { ISubject } from '../models/ISubject';
+import { ClassModel } from '../models/ClassModel';
 
 @Component({
   selector: 'app-docente',
@@ -27,13 +28,13 @@ export class DocentePage implements OnInit {
   idUserHtmlRouterLink: any;
   user_id!: number;
   dateToday: Date = new Date();
-  name: string="";
-  short: string="";
+
   attendance: IAttendance = {
     numrun: 0,
     cod_subject: 0
   };
-  class: ISubject = {
+
+  class: ClassModel = {
     subject_name: "",
     cod_subject: 0,
     subject_short: "",
@@ -49,21 +50,33 @@ export class DocentePage implements OnInit {
     //GETTING CLASSES
     this._attendanceService.getClasses(this.user_id).subscribe(
       (classes: any)=>{
-        for(let c of classes){
-          this.class.cod_subject = c.cod_subject;
-          this.class.day = c.day;
-          // this._attendanceService.getSubjectInfo(c.cod_subject).subscribe(
-          //   (subject: any)=>{              
-          //     this.name = subject[0].subject_name;
-          //     this.short = subject[0].subject_short;              
-          //   }
-          // );
-          // this.class.subject_name = this.name;
-          // this.class.subject_short = this.short;  
-          this.subjectsInfo$.push(this.class);        
+        for(let class_element of classes){          
+
+          this._attendanceService.getSubjectInfo(class_element.cod_subject).subscribe(
+            (subject: any)=>{              
+              this.class.subject_name = subject[0].subject_name;
+              this.class.subject_short = subject[0].subject_short; 
+              this.class.cod_subject = class_element.cod_subject;
+              this.class.day = class_element.day;  
+
+              console.log("this.class: "+JSON.stringify(this.class));
+              this.subjectsInfo$.push(this.class);    
+              //this.restartISubject(); 
+              console.log("this.class: "+JSON.stringify(this.class));
+                         
+            }
+          );          
+          
+             
         }        
       }
     );
+
+    for(let subject_element of this.subjectsInfo$){
+      console.log("subject_element(BEFORE): "+subject_element);
+      
+      console.log("subject_element(AFTER): "+subject_element);
+    };
 
     //CONSOLE LOGS
     console.log(this.subjectsInfo$);
@@ -72,6 +85,13 @@ export class DocentePage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  restartISubject(){
+    this.class.cod_subject = 0;
+    this.class.day = "";
+    this.class.subject_name = "";
+    this.class.subject_short = ""
   }
 
   backLogin() {
