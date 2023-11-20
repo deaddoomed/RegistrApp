@@ -4,13 +4,17 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { IUser } from '../models/IUser';
 import { Router, RouterLinkWithHref } from '@angular/router';
+import { IUserLogin } from '../models/IUserLogin';
+import { UserService } from '../services/user_service';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-userinfo',
   templateUrl: './userinfo.page.html',
   styleUrls: ['./userinfo.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, RouterLinkWithHref, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule, RouterLinkWithHref, FormsModule,HttpClientModule],
+  providers: [UserService]
 })
 export class UserinfoPage implements OnInit {
   
@@ -27,12 +31,24 @@ export class UserinfoPage implements OnInit {
     password: ""
   }
 
-  constructor(private route : Router) { }
+  registerReceived: IUserLogin = {
+    email: '',
+    password: ''
+  };
+
+  constructor(private route : Router, private _usuarioService: UserService) { 
+    this.registerInfo = this.route.getCurrentNavigation()?.extras.state?.['userInfo'];
+  }    
 
   ngOnInit() {
   }
 
   backLogin() {
     this.route.navigate(['/login']);
+  }
+
+  registerUser(){
+    this.registerInfo.username=this.registerInfo.first_name;
+    console.log(this.registerInfo);
   }
 }

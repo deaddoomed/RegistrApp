@@ -19,17 +19,24 @@ export class RegisterPage implements OnInit {
     password: ''
   };
   password_validation: string = "";
+  password_invalid: boolean = false;
   
   constructor(private route : Router) { }
 
   ngOnInit() {
+    this.password_invalid = false;
   }
 
   goToUserInfo() {
-    this.route.navigate(['/userinfo'], {state:{userInfo: this.registerModal}})
+    if((this.password_validation==this.registerModal.password)&&this.registerModal.password!=""&&this.registerModal.email!=""){
+      this.route.navigate(['/userinfo'], {state:{userInfo: this.registerModal}})
+    }else{
+      this.password_invalid = true;
+    }
   }
 
   backLogin() {
+    this.password_invalid = false;
     this.route.navigate(['/login']);
   }
 }

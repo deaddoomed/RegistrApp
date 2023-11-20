@@ -23,34 +23,29 @@
     </div>
   </div>
 
-  <div >
-
+  <div>
     <!-- EMAIL -->
-    <div id="content">
+    <ion-list>
       <ion-input 
         label="Correo Institucional" 
         class="center-content" 
+        type="text"
         placeholder="Ingresa tu correo institucional"
         labelPlacement="floating" 
         autocomplete="off"
         [(ngModel)]="registerModal.email">
-      </ion-input>
-    </div>  
-  
-    <div>
+      </ion-input>  
+
       <ion-input 
         label="Password" 
         class="center-content" 
-        label="Password" 
         placeholder="Ingresa tu contraseña" 
-        [clearInput]="true"
         type="Password"
         labelPlacement="floating"
         autocomplete="off"
         [(ngModel)]="registerModal.password">
       </ion-input>      
-    </div>
-    <div>
+
       <ion-input 
         label="Repetir Password" 
         class="center-content" 
@@ -61,13 +56,14 @@
         labelPlacement="floating"
         autocomplete="off"
         [(ngModel)]="password_validation">
-      </ion-input>      
-    </div>
+      </ion-input>
 
-    <div class="center-content">
-      <ion-button (click)="goToUserInfo()">Registrar</ion-button>
-    </div>
+      <ion-text *ngIf="password_invalid" color="danger">Las contraseñas no coinciden o hay un campo vacio</ion-text>
 
-  </div>
+    </ion-list>
+
+    <ion-button (click)="goToUserInfo()">Registrar</ion-button>
+
+  </div>  
 
 </ion-content>
