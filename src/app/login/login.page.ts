@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule, NgFor, NgForOf} from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { Router, RouterLinkWithHref } from '@angular/router';
+import { Router, RouterLinkWithHref, RouterModule } from '@angular/router';
 import { IUserLogin } from '../models/IUserLogin';
 import { lastValueFrom } from 'rxjs';
 import { UserService } from '../services/user_service';
@@ -15,7 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, RouterLinkWithHref, FormsModule, HttpClientModule, NgFor, NgForOf],
+  imports: [IonicModule, CommonModule, RouterLinkWithHref, RouterModule,FormsModule, HttpClientModule, NgFor, NgForOf],
   providers: [UserService]
 })
 
@@ -46,6 +46,10 @@ export class LoginPage implements OnInit, OnDestroy{
       key: 'user',
       value: JSON.stringify(user)
     });
+  }
+
+  goToRegister(){
+    this.route.navigate(['/register']);
   }
 
   //FUNCION QUE PASA ID A LA SIGUIENTE PAGINA
