@@ -47,8 +47,10 @@ export class UserinfoPage implements OnInit {
     this.route.navigate(['/login']);
   }
 
-  registerUser(){
+  registerUser(){    
     this.registerInfo.username=this.registerInfo.first_name;
-    console.log(this.registerInfo);
+    this.registerInfo.id_type = 1;
+    this._usuarioService.registerUser(this.registerInfo);
+    console.log(JSON.stringify(this.registerInfo));
   }
 }
