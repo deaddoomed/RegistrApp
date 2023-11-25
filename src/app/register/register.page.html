@@ -1,0 +1,69 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>RegistrApp</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content id="main" [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Register</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card id="content">
+    <ion-card-header>
+      <ion-card-title>Register</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <div>
+    <div>
+      <ion-button (click)="backLogin()">Volver al Login</ion-button>
+    </div>
+  </div>
+
+  <div>
+    <!-- EMAIL -->
+    <ion-list>
+      <ion-input 
+        label="Correo Institucional" 
+        class="center-content" 
+        type="text"
+        placeholder="Ingresa tu correo institucional"
+        labelPlacement="floating" 
+        autocomplete="off"
+        [(ngModel)]="registerModal.email">
+      </ion-input>  
+
+      <ion-input 
+        label="Password" 
+        class="center-content" 
+        placeholder="Ingresa tu contraseña" 
+        type="Password"
+        labelPlacement="floating"
+        autocomplete="off"
+        [(ngModel)]="registerModal.password">
+      </ion-input>      
+
+      <ion-input 
+        label="Repetir Password" 
+        class="center-content" 
+        label="Password" 
+        placeholder="Confirma la contraseña" 
+        [clearInput]="true"
+        type="Password"
+        labelPlacement="floating"
+        autocomplete="off"
+        [(ngModel)]="password_validation">
+      </ion-input>
+
+      <ion-text *ngIf="password_invalid" color="danger">Las contraseñas no coinciden o hay un campo vacio</ion-text>
+
+    </ion-list>
+
+    <ion-button (click)="goToUserInfo()">Registrar</ion-button>
+
+  </div>  
+
+</ion-content>

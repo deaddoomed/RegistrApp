@@ -14,8 +14,7 @@
   <ion-card id="content">
     <ion-card-header>
       <ion-card-title>Login</ion-card-title>
-    </ion-card-header>  
-
+    </ion-card-header> 
   </ion-card>
 
   <div >
@@ -30,11 +29,9 @@
         autocomplete="off"
         [(ngModel)]="userLoginModal.email">
       </ion-input>
+    <div>
 
-      <div>
-
-      </div>
-
+    </div>
       <ion-input 
         class="center-content" 
         label="Password" 
@@ -44,8 +41,7 @@
         labelPlacement="floating"
         autocomplete="off"
         [(ngModel)]="userLoginModal.password">
-      </ion-input>
-      
+      </ion-input>      
     </div>
 
     <div class="center-content">
@@ -53,6 +49,11 @@
     </div>
 
     <img alt="logo" src="../../assets/img/logo.png" />
+
+    <div>
+      <a [routerLink]="['/register']">Registrate</a>
+    </div>
+    
   </div>
 
 </ion-content>

@@ -1,0 +1,100 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>RegistrApp</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content id="main" [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Usuario</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card id="content">
+    <ion-card-header>
+      <ion-card-title>Informacion de Usuario</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <div>
+    <ion-label>Ingresa tu informacion personal<br></ion-label>
+    <br>
+  </div>
+
+  <div>
+    <!-- RUN -->
+    <div id="content">
+      <ion-input 
+        label="RUN" 
+        class="center-content" 
+        placeholder="RUN (sin puntos)"
+        labelPlacement="floating" 
+        autocomplete="off"
+        type="number"
+        [(ngModel)]="registerInfo.numrun">
+      </ion-input>
+    </div>
+    <div id="content">
+        <ion-input 
+          label="Codigo Verificador" 
+          class="center-content" 
+          placeholder="Codigo Verificador"
+          labelPlacement="floating" 
+          autocomplete="off"
+          type="number"
+          [(ngModel)]="registerInfo.dvrun">
+        </ion-input>
+    </div> 
+
+    <!-- NOMBRE COMPLETO -->
+    <div id="content">
+      <ion-input 
+        label="Nombres" 
+        class="center-content" 
+        placeholder="Primer Nombre"
+        labelPlacement="floating" 
+        autocomplete="off"
+        [(ngModel)]="registerInfo.first_name">
+      </ion-input>
+    </div>
+    <div id="content">
+        <ion-input 
+          class="center-content" 
+          placeholder="Segundo Nombre"
+          labelPlacement="floating" 
+          autocomplete="off"
+          [(ngModel)]="registerInfo.second_name">
+        </ion-input>
+    </div>   
+    <div id="content">
+        <ion-input 
+          label="Apellido Paterno" 
+          class="center-content" 
+          placeholder="Apellido Paterno"
+          labelPlacement="floating" 
+          autocomplete="off"
+          [(ngModel)]="registerInfo.p_last_name">
+        </ion-input>
+    </div>   
+    <div id="content">
+        <ion-input 
+          label="Apellido Materno"
+          class="center-content" 
+          placeholder="Apellido Materno"
+          labelPlacement="floating" 
+          autocomplete="off"
+          [(ngModel)]="registerInfo.m_last_name">
+        </ion-input>
+    </div>    
+
+    <div>
+      <div>
+        <ion-button (click)="backLogin()">Cancelar</ion-button>
+        <ion-button (click)="registerUser()">Registrar</ion-button>
+      </div>
+    </div>
+
+  </div>
+
+</ion-content>
