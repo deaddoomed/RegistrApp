@@ -3,6 +3,7 @@ import { UserModel } from "../models/UserModel";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, map, catchError } from "rxjs";
 import { IUserLogin } from "../models/IUserLogin";
+import { IUser } from "../models/IUser";
 
 
 @Injectable({ providedIn: 'root' })
@@ -36,5 +37,9 @@ export class UserService {
                 console.log(err)
                 return err;})
         )
+    }
+
+    registerUser(iUser: IUser){
+        return this._httpclient.post(this.URL_SUPABASE+'Users',iUser,{headers: this.supabaseheaders});
     }
 }
