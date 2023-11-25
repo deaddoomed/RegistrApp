@@ -51,6 +51,7 @@ export class UserinfoPage implements OnInit {
     this.registerInfo.username=this.registerInfo.first_name;
     this.registerInfo.id_type = 1;
     this._usuarioService.registerUser(this.registerInfo);
-    console.log(JSON.stringify(this.registerInfo));
+    this.backLogin();
+
   }
 }

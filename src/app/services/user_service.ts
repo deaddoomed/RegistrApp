@@ -40,6 +40,6 @@ export class UserService {
     }
 
     registerUser(iUser: IUser){
-        return this._httpclient.post(this.URL_SUPABASE+'Users',iUser,{headers: this.supabaseheaders,responseType: 'json'}).subscribe((data)=>{console.log(data)});
+        return this._httpclient.post(this.URL_SUPABASE+'Users',iUser,{headers: this.supabaseheaders,responseType: 'json'}).subscribe(response=>{console.log("user registered")});
     }
 }
