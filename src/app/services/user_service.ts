@@ -40,17 +40,6 @@ export class UserService {
     }
 
     registerUser(iUser: IUser){
-        return this._httpclient.post(this.URL_SUPABASE+'Users',
-        {   "email":iUser.email,
-            "password":iUser.password,
-            "dvrun":iUser.dvrun,
-            "numrun":iUser.numrun,
-            "first_name":iUser.first_name,
-            "second_name":iUser.second_name,
-            "p_last_name":iUser.p_last_name,
-            "m_last_name":iUser.m_last_name,
-            "username":iUser.username,
-            "id_type":1},
-        {headers: this.supabaseheaders,responseType: 'json'});
+        return this._httpclient.post(this.URL_SUPABASE+'Users',iUser,{headers: this.supabaseheaders,responseType: 'json'}).subscribe((data)=>{console.log(data)});
     }
 }
