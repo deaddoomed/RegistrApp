@@ -40,6 +40,8 @@
 
   </ion-card>
 
+  <ion-label> Selecciona un curso </ion-label>
+
   <ion-list>
     <ion-item *ngFor="let subject of subjectsInfo$">
       <ion-card (click)="createAttendance(subject.cod_subject)">  
@@ -50,40 +52,5 @@
     </ion-item>
   </ion-list>
 
-  <!-- <div id="content">
-    <ion-input 
-      class="center-content" 
-      label="date" 
-      type="text"
-      [clearInput]="true"
-      labelPlacement="floating" 
-      [(ngModel)]="attendance.date">
-    </ion-input>
-
-    <ion-input 
-      class="center-content" 
-      label="numrun" 
-      type="number"
-      [clearInput]="true"
-      labelPlacement="floating" 
-      [(ngModel)]="attendance.numrun">
-    </ion-input>
-
-    <ion-input 
-      class="center-content" 
-      label="cod_class" 
-      type="number"
-      [clearInput]="true"
-      labelPlacement="floating" 
-      [(ngModel)]="attendance.cod_class">
-    </ion-input>
-    
-  </div>
-
-  <div>
-    <div>
-      <ion-button (click)="createAttendance()">Crear asistencia</ion-button>
-    </div>
-  </div> -->
-
+ 
 </ion-content>

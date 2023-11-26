@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, JsonPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { UserModel } from '../models/UserModel';
@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
 import { AttendanceService } from '../services/attendance_service';
 import { IAttendance } from '../models/IAttendance';
+import { AttendanceModel } from '../models/AttendanceModel';
 import { ISubject } from '../models/ISubject';
 
 @Component({
@@ -62,8 +63,17 @@ export class DocentePage implements OnInit {
   }
 
   createAttendance(cod_subject: number) {
-     this._attendanceService.getList(cod_subject).subscribe((data) => {console.log(data)});
-     console.log("attendancedata :"+JSON.stringify(this.attendance));
+    let attendance_date = this.dateToday.getDate()+"-"+this.dateToday.getMonth();
+    this._attendanceService.validateAttendance(cod_subject,attendance_date).subscribe((data)=>{
+      if(data){        
+        this._attendanceService.getList(cod_subject).subscribe(
+          (lists: any) => {
+            for(let list of lists){
+              let attendance = new AttendanceModel(attendance_date,list.numrun,list.cod_subject);
+              this._attendanceService.generateAttendance(attendance);
+        }})
+      }
+    });      
   }
 
 }
