@@ -17,8 +17,7 @@ export class AttendanceService {
       return this._httpclient.get(this.URL_SUPABASE+'Attendance?cod_subject=eq.'+cod_subject+'&numrun=eq.'+numrun, { headers: this.supabaseheaders, responseType: 'json'});
     }
 
-    generateAttendance(attendance: AttendanceModel){
-      console.log("registering for: "+attendance.cod_subject);
+    generateAttendance(attendance: AttendanceModel){      
       this._httpclient.post(this.URL_SUPABASE+'Attendance',attendance,{headers: this.supabaseheaders}).subscribe(response=>{console.log("attendance registered for: "+attendance.numrun)});
     }
 
