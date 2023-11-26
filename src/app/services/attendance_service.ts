@@ -27,7 +27,7 @@ export class AttendanceService {
 
   //CLASSES MODULE
   getClasses(numrun: number): Observable<any>{
-    return this._httpclient.get<any>(this.URL_SUPABASE+'Class?numrun=eq.'+numrun, { headers: this.supabaseheaders, responseType: 'json'});
+    return this._httpclient.get<any>(this.URL_SUPABASE+'Subject?numrun_teacher=eq.'+numrun, { headers: this.supabaseheaders, responseType: 'json'});
   }
   
   getClassCodes(cod_subject: number): Observable<any> {
