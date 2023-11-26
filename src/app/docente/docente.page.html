@@ -43,7 +43,8 @@
   <ion-list>
     <ion-item *ngFor="let subject of subjectsInfo$">
       <ion-card (click)="createAttendance(subject.cod_subject)">  
-        <ion-label>{{ subject.cod_subject }}</ion-label>
+        <ion-label>{{ subject.subject_name }}</ion-label>
+        <ion-label>{{ subject.subject_short }}{{ subject.cod_subject }}</ion-label>
         <ion-label>{{ subject.day }}</ion-label>
       </ion-card>
     </ion-item>

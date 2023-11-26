@@ -27,17 +27,10 @@ export class DocentePage implements OnInit {
   idUserHtmlRouterLink: any;
   user_id!: number;
   dateToday: Date = new Date();
-  name: string="";
-  short: string="";
+
   attendance: IAttendance = {
     numrun: 0,
     cod_subject: 0
-  };
-  class: ISubject = {
-    subject_name: "",
-    cod_subject: 0,
-    subject_short: "",
-    day: ""
   };
 
   constructor(private route : Router, private _userService: UserService, private _attendanceService : AttendanceService) {
@@ -49,24 +42,13 @@ export class DocentePage implements OnInit {
     //GETTING CLASSES
     this._attendanceService.getClasses(this.user_id).subscribe(
       (classes: any)=>{
-        for(let c of classes){
-          this.class.cod_subject = c.cod_subject;
-          this.class.day = c.day;
-          // this._attendanceService.getSubjectInfo(c.cod_subject).subscribe(
-          //   (subject: any)=>{              
-          //     this.name = subject[0].subject_name;
-          //     this.short = subject[0].subject_short;              
-          //   }
-          // );
-          // this.class.subject_name = this.name;
-          // this.class.subject_short = this.short;  
-          this.subjectsInfo$.push(this.class);        
+        for(let class_element of classes){
+          this.subjectsInfo$.push(class_element);               
         }        
       }
     );
 
     //CONSOLE LOGS
-    console.log(this.subjectsInfo$);
     console.log("userid :"+this.user_id);
     console.log("today: "+this.dateToday.getDate()+"-"+this.dateToday.getMonth());
   }
@@ -74,13 +56,14 @@ export class DocentePage implements OnInit {
   ngOnInit() {
   }
 
+
   backLogin() {
     this.route.navigate(['/login']);
   }
 
   createAttendance(cod_subject: number) {
      this._attendanceService.getList(cod_subject).subscribe((data) => {console.log(data)});
-     //console.log("attendancedata :"+JSON.stringify(this.attendance));
+     console.log("attendancedata :"+JSON.stringify(this.attendance));
   }
 
 }
