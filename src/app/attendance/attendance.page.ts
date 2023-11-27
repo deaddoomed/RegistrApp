@@ -41,8 +41,7 @@ export class AttendancePage implements OnInit {
    
     this._attendanceService.getAttendance(this.attendanceInfo.cod_subject,this.attendanceInfo.numrun).subscribe(
       (data : any) => {
-        this._attendanceService.getSubjectName(this.attendanceInfo.cod_subject).subscribe(response =>console.log("registering for: "+response));
-        if(data.length > 0){          
+          if(data.length > 0){          
           for(let i in data){
             this.attendanceInfoReceived$.push(data[i]);
           }

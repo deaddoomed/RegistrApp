@@ -32,7 +32,7 @@
     </ion-item>
   </ion-list>
 
-  <ion-list>
+  <ion-list >
     <ion-item *ngFor="let subject of subjectsInfoReceived$">
       <ion-card (click)="searchAttendance(subject.cod_subject)">  
         <ion-label>{{ subject.subject_name }}</ion-label>
@@ -42,7 +42,7 @@
   </ion-list>
 
 
-  <div id="content">
+  <!-- <div id="content">
     <ion-input 
       class="center-content" 
       label="id" 
@@ -51,11 +51,17 @@
       labelPlacement="floating" 
       [(ngModel)]="attendance_id">
     </ion-input>    
-  </div>
+  </div> -->
+
+  <!-- <div>
+    <div>
+      <ion-button (click)="updateAttendance(attendance_id)">Registrar asistencia</ion-button>
+    </div>
+  </div> -->
 
   <div>
     <div>
-      <ion-button (click)="updateAttendance(attendance_id)">Registrar asistencia</ion-button>
+      <ion-button expand="full">Registrar asistencia</ion-button>
     </div>
   </div>
 

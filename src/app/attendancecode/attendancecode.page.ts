@@ -27,13 +27,19 @@ export class AttendanceCodePage implements OnInit {
     numrun: 0,
     cod_subject: 0
   };
-
+  subjectnameModal: any;
   QRText: string = "";
 
-  constructor(private route : Router) { 
+  constructor(private route : Router, private _attendanceService : AttendanceService) { 
     this.QRModal = this.route.getCurrentNavigation()?.extras.state?.['QRInfo'];
     this.QRText=JSON.stringify(this.QRModal);
     console.log(this.QRText);
+
+    this._attendanceService.getSubjectInfo(this.QRModal.cod_subject).subscribe(
+      (data)=>{        
+          this.subjectnameModal=data[0].subject_name;
+      }
+    );
 
   }
 
@@ -41,6 +47,7 @@ export class AttendanceCodePage implements OnInit {
   }
 
   backTeacher() {
+    this.QRModal.cod_subject = 0;
     this.route.navigate(['/docente'], {state:{userInfo: this.QRModal.numrun}});
   }
 }

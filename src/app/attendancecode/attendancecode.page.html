@@ -21,13 +21,17 @@
       <h3>Lee el codigo QR para registrar la asistencia</h3>
     </ion-card>
     
-    <ion-card>
+    <ion-card class="ion-justify-content-center">
       <qrcode 
         [qrdata]="QRText" 
         [width]="256"
         [errorCorrectionLevel]="'M'">
       </qrcode>
     </ion-card>
+
+    <ion-card-content>
+      <h3>{{ subjectnameModal }}</h3>
+    </ion-card-content>
 
   </div>
 

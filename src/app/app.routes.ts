@@ -37,7 +37,11 @@ export const routes: Routes = [
   {
     path: 'attendancecode',
     loadComponent: () => import('./attendancecode/attendancecode.page').then( m => m.AttendanceCodePage)
+  },  {
+    path: 'attendanceread',
+    loadComponent: () => import('./attendanceread/attendanceread.page').then( m => m.AttendancereadPage)
   },
+
 
 
 
