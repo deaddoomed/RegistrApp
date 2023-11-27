@@ -1,0 +1,36 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Registrar Asistencia</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Registrar Asistencia</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <div>
+    <ion-button (click)="backTeacher()">Volver a Docente</ion-button>
+  </div>
+
+  <div>
+    <ion-card>
+      <h3>Lee el codigo QR para registrar la asistencia</h3>
+    </ion-card>
+    
+    <ion-card>
+      <qrcode 
+        [qrdata]="QRText" 
+        [width]="256"
+        [errorCorrectionLevel]="'M'">
+      </qrcode>
+    </ion-card>
+
+  </div>
+
+</ion-content>
+
+

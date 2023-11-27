@@ -21,6 +21,7 @@ export class AttendancePage implements OnInit {
   idUserHtmlRouterLink: any;
   subjectnameModal: any;
   attendanceInfo: IAttendance={
+    date:"",
     numrun:0,
     cod_subject:0,
   }
@@ -56,7 +57,6 @@ export class AttendancePage implements OnInit {
   ngOnInit() {
      
   }
-
 
   backStudent() {
     this.attendanceInfo.cod_subject = 0;
