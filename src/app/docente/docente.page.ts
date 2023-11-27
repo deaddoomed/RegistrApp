@@ -30,6 +30,7 @@ export class DocentePage implements OnInit {
   dateToday: Date = new Date();
 
   attendance: IAttendance = {
+    date:"",
     numrun: 0,
     cod_subject: 0
   };
@@ -72,7 +73,10 @@ export class DocentePage implements OnInit {
               let attendance = new AttendanceModel(attendance_date,list.numrun,list.cod_subject);
               this._attendanceService.generateAttendance(attendance);
         }})
-      }
+      };
+
+      this.attendance = {date:attendance_date, numrun:this.user_id, cod_subject:cod_subject};
+      this.route.navigate(['/attendancecode'], {state:{QRInfo: this.attendance }});
     });      
   }
 

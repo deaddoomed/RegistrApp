@@ -27,6 +27,7 @@ export class AlumnoPage implements OnInit {
   userList: any;
   attendance_id: number = 0;
   attedanceModal: IAttendance={
+    date:"",
     numrun:0,
     cod_subject:0,
   }
