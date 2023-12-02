@@ -63,9 +63,8 @@ export class AlumnoPage implements OnInit {
     this.route.navigate(['/login']);
   }
 
-  updateAttendance(attendance_id: number) {
-    this._attendanceService.registerAttendance(attendance_id).subscribe((data) => {});
-    this.attendance_id = 0;
+  updateAttendance() {
+    this.route.navigate(['/attendanceread'], {state:{classInfo: this.attedanceModal}});
   }
 
   searchAttendance(cod_subject: number) {
