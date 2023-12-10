@@ -23,6 +23,8 @@ export class AttendancereadPage implements OnInit {
     cod_subject:0,
   }
 
+  status_message : string = "";
+
   constructor(private route : Router, private alertController : AlertController) { }
 
   ngOnInit() {
@@ -33,7 +35,7 @@ export class AttendancereadPage implements OnInit {
 
   async requestPermissions(): Promise<boolean>{
     const { camera } = await BarcodeScanner.requestPermissions();
-    return camera === 'granted' || camera === 'limited';    
+    return camera === 'granted' || camera === 'limited'; 
   }
 
   async presentAlert(): Promise<void> {

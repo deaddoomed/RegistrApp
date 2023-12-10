@@ -57,9 +57,15 @@ export class LoginPage implements OnInit, OnDestroy{
     const user_id = await lastValueFrom(this._usuarioService.getLoginId(userLoginInfo));
     if(user_id){
       const user_type = await lastValueFrom(this._usuarioService.getUserType(user_id));
-      if (user_type == 1){
-        console.log("usertype : alumno("+user_type+")");
-        this.route.navigate(['/alumno'], {state:{userInfo: user_id}})
+
+      if(user_type == 1){
+        if(this._usuarioService.isMobile()){
+          console.log("usertype : alumno("+user_type+")");
+          this.route.navigate(['/alumno'], {state:{userInfo: user_id}})
+        }
+        else{
+          window.alert("La cuenta de alumno requiere funciones de camara, por favor ingrese por la aplicacion movil");
+        } 
       }
       if(user_type == 2){
         console.log("usertype : alumno("+user_type+")");
@@ -72,4 +78,5 @@ export class LoginPage implements OnInit, OnDestroy{
     }
   }
 
+ 
 }

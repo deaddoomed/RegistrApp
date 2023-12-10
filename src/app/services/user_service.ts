@@ -15,6 +15,14 @@ export class UserService {
     URL_SUPABASE = 'https://durbxicxcabbrhwftadv.supabase.co/rest/v1/'
     supabaseheaders = new HttpHeaders().set('apikey','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR1cmJ4aWN4Y2FiYnJod2Z0YWR2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTU0NzExOTksImV4cCI6MjAxMTA0NzE5OX0.NASHfj0II-9NVlMW7OBzBXdRYCfg6OwTsEloibW8pB0')
 
+    isMobile(): boolean {
+        const plataforms = /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+        if (plataforms.test(navigator.userAgent)){ 
+            return true} 
+        else { 
+            return false}
+    }
+
     getUser(id: number): Observable<UserModel> {
         return this._httpclient.get<UserModel>(this.URL_SUPABASE+'Users?numrun=eq.'+ id, { headers: this.supabaseheaders.set('Accept', 'application/vnd.pgrst.object+json'), responseType: 'json' });
     }
